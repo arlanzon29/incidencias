@@ -1,0 +1,10 @@
+<polymer-element name="olba-auth" attributes="username password">
+  <template>
+    <div layout vertical>
+      <paper-input label="Username" id="txtUsername" floatinglabel="true" value="{{username}}"></paper-input>
+      <paper-input label="Password" id="txtPassword" floatinglabel="true" value="{{password}}"></paper-input>
+      <paper-button affirmative autofocus on-click="{{connect}}">Connect</paper-button>
+    </div>
+  </template>
+   <script src="olbaAuth.js"></script>
+</polymer-element>

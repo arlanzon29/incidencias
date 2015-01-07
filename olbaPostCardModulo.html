@@ -1,0 +1,87 @@
+<polymer-element name="olba-postcardmodulo" >
+  <template>
+    <style>
+    :host {
+      display: block;
+      position: relative;
+      background-color: white;
+      padding: 00px;
+      width: 100%%;
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+
+
+
+    .card-header {
+      margin-bottom: 10px;
+    }
+    polyfill-next-selector { content: '.card-header h2'; }
+    .card-header ::content h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 200;
+    }
+    polyfill-next-selector { content: '.card-header img'; }
+    .card-header ::content img {
+      width: 60px;
+       height: 60px;
+      border-radius: 20%;
+      margin: 10px;
+    }
+     polyfill-next-selector { content: '.card-header p'; }
+    .card-header ::content p {
+      margin: 0;
+      font-size: 1.0rem;
+      font-weight: 200;
+    }
+
+
+    #nextIcon {
+      color: blue;
+    }
+
+
+    #divIcon{
+      width:32px;
+    }
+    #divImg{
+      width:86px;
+    }
+     #divText{
+      width:80%;
+    }
+
+
+
+     :host([done]) #mainDiv {
+        background-color: #C0D9D9;
+     }
+
+      :host([send]) #mainDiv {
+        background-color: LightSalmon;
+     }
+
+     #mainDiv {
+        background-color: LightCoral  ;
+     }
+
+    </style>
+    <div class="card-header" layout="" horizontal="" center="" id="mainDiv">
+      <div id="divImg">
+        <content select="img" ></content>
+      </div>
+      <div horizontal id="divText">
+        <content select="h2"></content>
+        <content select="p"></content>
+      </div>
+      <core-icon-button
+          id="nextIcon"
+          icon="arrow-forward"
+          on-tap="{{click}}">
+        </core-icon-button>
+    </div>
+
+  </template>
+  <script src="olbaPostCardModulo.js"></script>
+</polymer-element>

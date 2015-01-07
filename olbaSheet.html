@@ -1,0 +1,19 @@
+<polymer-element name="olba-sheet" attributes="key table allrows nombre username password">
+
+  <template>
+    <core-ajax
+    url="https://script.google.com/macros/s/AKfycbzfgyrZF4F2PaF2a9dW75NjsNDIZ1r-7M6RTEUbXSQBiCa2MlM/exec?method=getAll&user={{username}}&password={{password}}&table={{table}}"
+    handleAs="text"
+    on-core-response="{{handleResponse}}" id="allData"></core-ajax>
+
+    <core-ajax
+    url="https://script.google.com/macros/s/AKfycbzfgyrZF4F2PaF2a9dW75NjsNDIZ1r-7M6RTEUbXSQBiCa2MlM/exec?method=mergeAll&user={{username}}&password={{password}}&table={{table}}"
+    handleAs="text"
+    method="POST"
+    on-core-response="{{handleResponseMergeAll}}" id="mergeAll"></core-ajax>
+  </template>
+
+
+  <script src="olbaSheet.js"></script>
+
+</polymer-element>

@@ -1,0 +1,108 @@
+<polymer-element name="post-card" attributes="done send">
+  <template>
+    <style>
+    :host {
+      display: block;
+      position: relative;
+      background-color: white;
+      padding: 00px;
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+
+
+
+    .card-header {
+      margin-bottom: 10px;
+    }
+    polyfill-next-selector { content: '.card-header h2'; }
+    .card-header ::content h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 200;
+    }
+    polyfill-next-selector { content: '.card-header img'; }
+    .card-header ::content img {
+      width: 70px;
+      border-radius: 20%;
+      margin: 10px;
+    }
+     polyfill-next-selector { content: '.card-header p'; }
+    .card-header ::content p {
+      margin: 0;
+      font-size: 1.0rem;
+      font-weight: 200;
+    }
+
+
+    #doneIcon {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      color: #636363;
+    }
+    :host([done]) #doneIcon {
+      color: blue;
+    }
+
+
+    #sendIcon {
+      position: absolute;
+      top: 43px;
+      right: 3px;
+      color: #636363;
+    }
+    :host([send]) #sendIcon {
+      color: blue;
+    }
+    #divIcon{
+      width:32px;
+    }
+    #divImg{
+      width:86px;
+    }
+     #divText{
+      width:80%;
+    }
+
+
+
+     :host([done]) #mainDiv {
+        background-color: #C0D9D9;
+     }
+
+      :host([send]) #mainDiv {
+        background-color: LightSalmon;
+     }
+
+     #mainDiv {
+        background-color: LightCoral  ;
+     }
+
+    </style>
+    <div class="card-header" layout="" horizontal="" center="" id="mainDiv">
+      <div id="divImg">
+        <content select="img" ></content>
+      </div>
+      <div horizontal id="divText">
+        <content select="h2"></content>
+        <content select="p"></content>
+      </div>
+      <div vertical id="divIcon">
+        <core-icon-button
+          id="doneIcon"
+          icon="done"
+          on-tap="{{doneTapped}}">
+        </core-icon-button>
+        <core-icon-button
+          id="sendIcon"
+          icon="send"
+          on-tap="{{sendTapped}}">
+        </core-icon-button>
+      </div>
+    </div>
+
+  </template>
+  <script src="post-card.js"></script>
+</polymer-element>
