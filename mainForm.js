@@ -1,7 +1,7 @@
 
 
     Polymer("olba-main", {
-      username:"manager",
+      username:"manager2",
       password:"secure",
       addNuevaIncidencia:false,
        publish: {
