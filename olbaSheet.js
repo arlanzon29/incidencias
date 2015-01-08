@@ -23,7 +23,7 @@
           arr.push(obj);
         }
 
-        this.database=arr;
+        this.allrows=arr;
         this.fire("alldata");
       },
       handleResponseAllTables:function(obj,response){

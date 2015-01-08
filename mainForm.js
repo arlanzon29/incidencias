@@ -140,6 +140,15 @@
       listaPendientes:function(){
         this.$.core_animated_pages.selected=0;
         this.$.scaffold.closeDrawer();
+      },
+      refreshIncidencias:function(){
+        this.incidencias=[];
+        this.$.sheet.getAll();
+      },
+      refreshIncidenciasData:function(){
+        for (var i=0;i<this.incidencias.length;i++){
+          this.incidencias[i].image=this.incidencias[i].Cliente.replace(" ","")
+        }
       }
 
     });
