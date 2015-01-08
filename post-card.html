@@ -1,4 +1,4 @@
-<polymer-element name="post-card" attributes="done send">
+<polymer-element name="post-card" attributes="done send image">
   <template>
     <style>
     :host {
@@ -22,8 +22,7 @@
       font-size: 1.5rem;
       font-weight: 200;
     }
-    polyfill-next-selector { content: '.card-header img'; }
-    .card-header ::content img {
+    #image {
       width: 70px;
       border-radius: 20%;
       margin: 10px;
@@ -82,8 +81,8 @@
 
     </style>
     <div class="card-header" layout="" horizontal="" center="" id="mainDiv">
-      <div id="divImg">
-        <content select="img" ></content>
+      <div id="divImg" >
+          <img src="{{image}}" id="image" width="70" height="70" on-tap="{{clickImage}}" >
       </div>
       <div horizontal id="divText">
         <content select="h2"></content>

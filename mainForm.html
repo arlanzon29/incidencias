@@ -65,9 +65,8 @@
               <paper-fab mini  icon="refresh" title="Refresh" id="refreshIcon" on-click="{{refreshIncidencias}}"></paper-fab>
             <h1>Lista Incidencias</h1>
 
-            <template repeat="{{incidencia in incidencias}}">
-              <post-card on-done-tap="{{handleEstado}}" on-send-tap="{{handleEstado}}">
-                <img src="./images/{{incidencia.image}}.jpg" width="70" height="70">
+            <template repeat="{{incidencia in incidencias}}" >
+              <post-card on-done-tap="{{handleEstado}}" on-send-tap="{{handleEstado}}" image="./images/{{incidencia.image}}.jpg">
                 <h2>{{incidencia.Cliente}}</h2>
                 <p>{{incidencia.Incidencia}}</p>
               </post-card>
@@ -77,15 +76,13 @@
         <section>
            <h1>Seleccione Cliente</h1>
            <template repeat="{{cliente in clientes}}">
-              <olba-postcardcliente on-next="{{clienteNext}}">
-                <img src="./images/{{cliente.image}}.jpg" width="70" height="70">
+              <olba-postcardcliente on-next="{{clienteNext}}" image="./images/{{cliente.image}}.jpg">
                 <h2>{{cliente.Cliente}}</h2>
               </olba-postcardcliente>
             </template>
         </section>
         <section>
-          <olba-postcardcliente on-click="{{backCliente}}">
-            <img src="./images/{{clienteActual.image}}.jpg" width="70" height="70">
+          <olba-postcardcliente on-click="{{backCliente}}" image="./images/{{clienteActual.image}}.jpg">
             <h2>{{clienteActual.Cliente}}</h2>
           </olba-postcardcliente>
          <h1>Seleccione Modulo</h1>
@@ -97,8 +94,7 @@
           </template>
         </section>
         <section>
-          <olba-postcardcliente on-click="{{backCliente}}" >
-            <img src="./images/{{clienteActual.image}}.jpg" width="70" height="70">
+          <olba-postcardcliente on-click="{{backCliente}}" image="./images/{{clienteActual.image}}.jpg">
             <h2>{{clienteActual.Cliente}}</h2>
           </olba-postcardcliente>
            <olba-postcardmodulo on-click="{{backModulo}}">

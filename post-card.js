@@ -36,5 +36,8 @@
         this.done=true;
       }
       this.fire('send-tap');
+    },
+    clickImage:function(){
+      this.fire('imageclick');
     }
   });

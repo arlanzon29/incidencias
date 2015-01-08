@@ -1,4 +1,4 @@
-<polymer-element name="olba-postcardcliente" >
+<polymer-element name="olba-postcardcliente" attributes="image">
   <template>
     <style>
     :host {
@@ -22,8 +22,7 @@
       font-size: 1.5rem;
       font-weight: 200;
     }
-    polyfill-next-selector { content: '.card-header img'; }
-    .card-header ::content img {
+    #image {
       width: 60px;
        height: 60px;
       border-radius: 20%;
@@ -69,7 +68,7 @@
     </style>
     <div class="card-header" layout="" horizontal="" center="" id="mainDiv">
       <div id="divImg">
-        <content select="img" ></content>
+        <img src="{{image}}" id="image" width="70" height="70" on-tap="{{clickImage}}">
       </div>
       <div horizontal id="divText">
         <content select="h2"></content>
