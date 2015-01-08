@@ -1,4 +1,4 @@
-<polymer-element name="olba-sheet" attributes="key table allrows nombre username password">
+<polymer-element name="olba-sheet" attributes="key table tables allrows nombre username password database lasterror">
 
   <template>
     <core-ajax
@@ -11,6 +11,12 @@
     handleAs="text"
     method="POST"
     on-core-response="{{handleResponseMergeAll}}" id="mergeAll"></core-ajax>
+
+    <core-ajax
+    url="https://script.google.com/macros/s/AKfycbzfgyrZF4F2PaF2a9dW75NjsNDIZ1r-7M6RTEUbXSQBiCa2MlM/exec?method=getAll&user={{username}}&password={{password}}&tables={{tables}}"
+    handleAs="text"
+    on-core-response="{{handleResponseAllTables}}" id="allTables"></core-ajax>
+
   </template>
 
 

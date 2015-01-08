@@ -1,7 +1,7 @@
 
 
     Polymer("olba-main", {
-      username:"manager2",
+      username:"manager",
       password:"secure",
       addNuevaIncidencia:false,
        publish: {
@@ -10,28 +10,32 @@
           reflect: true
         }
       },
+      errorSheet:function(){
+        this.$.errorDialog.toggle()
+      },
       incidencias:[],
         ready: function() {
         this.$.auth.toggle();
       },
-      alldata:function(a,b,c){
+      allTables:function(a,b,c){
+
+        this.incidencias=this.database.Pendientes;
+        this.clientes=this.database.Clientes;
+        this.modulos=this.database.Modulos;
 
         for (var i=0;i<this.incidencias.length;i++){
           this.incidencias[i].image=this.incidencias[i].Cliente.replace(" ","")
         }
-         this.$.sheetCliente.getAll();
-      },
-      alldataclientes:function(a,b,c){
+
         for (var i=0;i<this.clientes.length;i++){
           this.clientes[i].image=this.clientes[i].Cliente.replace(" ","")
         }
-         this.$.sheetModulos.getAll();
-      },
-      alldatamodulos:function(a,b,c){
+
         for (var i=0;i<this.modulos.length;i++){
           this.modulos[i].image=this.modulos[i].Codigo.replace(" ","")
         }
-        this.$.auth.toggle();
+
+         this.$.auth.toggle();
       },
       handleEstado:function(event, detail, sender){
         var inci = sender.templateInstance.model.incidencia;
@@ -75,7 +79,8 @@
         }
       },
       connect:function(){
-        this.$.sheet.getAll();
+        this.$.sheetAll.getAllTables();
+        //this.$.sheet.getAll();
       },
       nuevaIncidencia:function(){
         this.$.core_animated_pages.selected=1;

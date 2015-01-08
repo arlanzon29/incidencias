@@ -30,14 +30,20 @@
         Incidencias ({{username}})
       </span>
 
+  <olba-sheet key="AKfycbzfgyrZF4F2PaF2a9dW75NjsNDIZ1r-7M6RTEUbXSQBiCa2MlM" tables="Pendientes,Clientes,Modulos" id="sheetAll"
+          on-alltables="{{allTables}}"
+          on-error="{{errorSheet}}" username="{{username}}" password="{{password}}" database="{{database}}"
+          lasterror="{{lasterror}}"></olba-sheet>
+
+
       <olba-sheet key="AKfycbzfgyrZF4F2PaF2a9dW75NjsNDIZ1r-7M6RTEUbXSQBiCa2MlM" table="Pendientes" id="sheet"
-          on-alldata="{{alldata}}" on-mergeall="{{mergeall}}" username="{{username}}" password="{{password}}" allrows="{{incidencias}}"></olba-sheet>
+           on-mergeall="{{mergeall}}" username="{{username}}" password="{{password}}" allrows="{{incidencias}}"></olba-sheet>
 
      <olba-sheet key="AKfycbzfgyrZF4F2PaF2a9dW75NjsNDIZ1r-7M6RTEUbXSQBiCa2MlM" table="Clientes" id="sheetCliente"
-          on-alldata="{{alldataclientes}}"  username="{{username}}" password="{{password}}" allrows="{{clientes}}"></olba-sheet>
+          username="{{username}}" password="{{password}}" allrows="{{clientes}}"></olba-sheet>
 
     <olba-sheet key="AKfycbzfgyrZF4F2PaF2a9dW75NjsNDIZ1r-7M6RTEUbXSQBiCa2MlM" table="Modulos" id="sheetModulos"
-          on-alldata="{{alldatamodulos}}"  username="{{username}}" password="{{password}}" allrows="{{modulos}}"></olba-sheet>
+          username="{{username}}" password="{{password}}" allrows="{{modulos}}"></olba-sheet>
 
       <core-animated-pages  selected="{{core_selected}}" selectedindex="0" notap id="core_animated_pages" >
         <section>
@@ -97,6 +103,11 @@
 
     <paper-dialog heading="Autentication" id="auth" autoCloseDisabled>
       <olba-auth on-connect="{{connect}}" username="{{username}}" password="{{password}}" id="olauth"></olba-auth>
+    </paper-dialog>
+
+    <paper-dialog heading="Error" id="errorDialog" >
+      {{lasterror}}
+
     </paper-dialog>
   </template>
 

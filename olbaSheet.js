@@ -7,6 +7,9 @@
       getAll:function(arr){
          this.$.allData.go();
       },
+      getAllTables:function(arr){
+         this.$.allTables.go();
+      },
       handleResponse:function(obj,response){
         var resp=JSON.parse(response.response.substring(13,response.response.length-1));
 
@@ -20,8 +23,37 @@
           arr.push(obj);
         }
 
-        this.allrows=arr;
+        this.database=arr;
         this.fire("alldata");
+      },
+      handleResponseAllTables:function(obj,response){
+        var allResp=JSON.parse(response.response.substring(13,response.response.length-1));
+
+        if (allResp.lastError==null){
+          var data={};
+
+          for(var propertyName in allResp) {
+            var arr=[];
+            var resp=allResp[propertyName];
+
+            for (var i=1;i<resp.length;i++){
+              var obj={};
+
+              for (var j=0;j<resp[0].length;j++){
+                obj[resp[0][j]]=resp[i][j];
+              }
+              arr.push(obj);
+            }
+
+            data[propertyName]=arr;
+          }
+
+          this.database=data;
+          this.fire("alltables");
+        }else{
+          this.lasterror=allResp.lastError;
+          this.fire("error");
+        }
       },
       mergeAll:function(arr){
         var body=JSON.stringify(arr);
