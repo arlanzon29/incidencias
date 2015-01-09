@@ -35,40 +35,21 @@
         <post-card on-done-tap="{{handleEstado}}" on-send-tap="{{handleEstado}}"
           image="./images/{{incidencia.image}}.jpg"
           header="{{incidencia.Cliente}}" footer="{{incidencia.Incidencia}}"
-          backColor="{{incidencia.Color}}">
+          backColor="{{incidencia.Estado=='Pendiente'?'LightCoral':incidencia.Estado=='Terminada'?'#C0D9D9':'LightSalmon'}}">
         <div vertical id="divIcon">
-          <template if={{incidencia.Estado=="Pendiente"}}>
-             <core-icon-button
+          <core-icon-button
               id="doneIcon"
               icon="done"
               on-tap="{{doneTapped}}"
-              style="color:black">
+               style="color:{{incidencia.Estado=='Pendiente'?'black':'blue'}}">
             </core-icon-button>
-          </template>
-          <template if={{incidencia.Estado!="Pendiente"}}>
-             <core-icon-button
-              id="doneIcon"
-              icon="done"
-              on-tap="{{doneTapped}}"
-              style="color:blue">
-            </core-icon-button>
-          </template>
-          <template if={{incidencia.Estado=="Enviada"}}>
-              <core-icon-button
-                id="sendIcon"
-                icon="send"
-                on-tap="{{sendTapped}}"
-                style="color:blue">
-              </core-icon-button>
-          </template>
-           <template if={{incidencia.Estado!="Enviada"}}>
-            <core-icon-button
-              id="sendIcon"
-              icon="send"
-              on-tap="{{sendTapped}}"
-              style="color:black">
-            </core-icon-button>
-          </template>
+
+          <core-icon-button
+            id="sendIcon"
+            icon="send"
+            on-tap="{{sendTapped}}"
+             style="color:{{incidencia.Estado=='Enviada'?'blue':'black'}}">
+          </core-icon-button>
           </div>
         </post-card>
       </template>

@@ -14,28 +14,13 @@ Polymer("olba-listaClientes",{
    saveChanges:function(){
      this.fire('savechanges');
    },
-    handleEstado:function(event, detail, sender){
-      var inci = sender.templateInstance.model.incidencia;
-      if (!sender.done && !sender.send){
-        inci.Estado="Pendiente";
-      }else if (sender.send){
-        inci.Estado="Enviada";
-      }else{
-        inci.Estado="Terminada";
-      }
-
-      inci.modified=true;
-      this.modified=true;
-    },
     doneTapped:function(event, detail, sender){
       var inci = sender.templateInstance.model.incidencia;
 
       if (inci.Estado=="Pendiente"){
           inci.Estado="Terminada";
-          inci.Color="#C0D9D9";
       }else{
           inci.Estado="Pendiente";
-          inci.Color="LightCoral";
       }
 
       inci.modified=true;
@@ -47,10 +32,8 @@ Polymer("olba-listaClientes",{
 
       if (inci.Estado=="Enviada"){
           inci.Estado="Terminada";
-          inci.Color="#C0D9D9";
       }else{
           inci.Estado="Enviada";
-          inci.Color="LightSalmon";
       }
 
       inci.modified=true;
@@ -77,14 +60,6 @@ Polymer("olba-listaClientes",{
 
         for (var i=0;i<this.incidencias.length;i++){
           this.incidencias[i].image=this.incidencias[i].Cliente.replace(" ","")
-
-          if (this.incidencias[i].Estado=="Pendiente"){
-            this.incidencias[i].Color="LightCoral";
-          }else if (this.incidencias[i].Estado=="Terminada"){
-            this.incidencias[i].Color="#C0D9D9";
-          }else{ /* Enviada */
-            this.incidencias[i].Color="LightSalmon";
-          }
         }
 
         for (var i=0;i<this.clientes.length;i++){
@@ -195,14 +170,6 @@ Polymer("olba-listaClientes",{
       refreshIncidenciasData:function(){
         for (var i=0;i<this.incidencias.length;i++){
           this.incidencias[i].image=this.incidencias[i].Cliente.replace(" ","")
-
-           if (this.incidencias[i].Estado=="Pendiente"){
-            this.incidencias[i].Color="LightCoral";
-          }else if (this.incidencias[i].Estado=="Terminada"){
-            this.incidencias[i].Color="#C0D9D9";
-          }else{ /* Enviada */
-            this.incidencias[i].Color="LightSalmon";
-          }
         }
       }
 
