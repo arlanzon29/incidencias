@@ -1,15 +1,67 @@
+Polymer("olba-listaClientes",{
 
-
-    Polymer("olba-main", {
-      username:"manager",
-      password:"secure",
-      addNuevaIncidencia:false,
-       publish: {
+})
+ Polymer("olba-listaincidencias", {
+   publish: {
         modified: {
           value: false,
           reflect: true
         }
       },
+   refreshIncidencias:function(){
+     this.fire('refreshincidencias');
+   },
+   saveChanges:function(){
+     this.fire('savechanges');
+   },
+    handleEstado:function(event, detail, sender){
+      var inci = sender.templateInstance.model.incidencia;
+      if (!sender.done && !sender.send){
+        inci.Estado="Pendiente";
+      }else if (sender.send){
+        inci.Estado="Enviada";
+      }else{
+        inci.Estado="Terminada";
+      }
+
+      inci.modified=true;
+      this.modified=true;
+    },
+    doneTapped:function(event, detail, sender){
+      var inci = sender.templateInstance.model.incidencia;
+
+      if (inci.Estado=="Pendiente"){
+          inci.Estado="Terminada";
+          inci.Color="#C0D9D9";
+      }else{
+          inci.Estado="Pendiente";
+          inci.Color="LightCoral";
+      }
+
+      inci.modified=true;
+      this.modified=true;
+    }
+    ,
+    sendTapped:function(event, detail, sender){
+      var inci = sender.templateInstance.model.incidencia;
+
+      if (inci.Estado=="Enviada"){
+          inci.Estado="Terminada";
+          inci.Color="#C0D9D9";
+      }else{
+          inci.Estado="Enviada";
+          inci.Color="LightSalmon";
+      }
+
+      inci.modified=true;
+      this.modified=true;
+    }
+ });
+
+    Polymer("olba-main", {
+      username:"manager",
+      password:"secure",
+      addNuevaIncidencia:false,
       errorSheet:function(){
         this.$.errorDialog.toggle()
       },
@@ -25,6 +77,14 @@
 
         for (var i=0;i<this.incidencias.length;i++){
           this.incidencias[i].image=this.incidencias[i].Cliente.replace(" ","")
+
+          if (this.incidencias[i].Estado=="Pendiente"){
+            this.incidencias[i].Color="LightCoral";
+          }else if (this.incidencias[i].Estado=="Terminada"){
+            this.incidencias[i].Color="#C0D9D9";
+          }else{ /* Enviada */
+            this.incidencias[i].Color="LightSalmon";
+          }
         }
 
         for (var i=0;i<this.clientes.length;i++){
@@ -36,19 +96,6 @@
         }
 
          this.$.auth.toggle();
-      },
-      handleEstado:function(event, detail, sender){
-        var inci = sender.templateInstance.model.incidencia;
-        if (!sender.done && !sender.send){
-          inci.Estado="Pendiente";
-        }else if (sender.send){
-          inci.Estado="Enviada";
-        }else{
-          inci.Estado="Terminada";
-        }
-
-        inci.modified=true;
-        this.modified=true;
       },
       saveChanges:function(){
         var send=[["Numero","Estado"]];
@@ -66,7 +113,7 @@
       },
       mergeall:function(){
         if (!this.addNuevaIncidencia){/* Si no añado es que estoy actualizando */
-          this.modified=false;
+          this.$.pantallaIncidencias.modified=false;
 
           for (var i=0;i<this.incidencias.length;i++){
             this.incidencias[i].modified=false;
@@ -148,6 +195,14 @@
       refreshIncidenciasData:function(){
         for (var i=0;i<this.incidencias.length;i++){
           this.incidencias[i].image=this.incidencias[i].Cliente.replace(" ","")
+
+           if (this.incidencias[i].Estado=="Pendiente"){
+            this.incidencias[i].Color="LightCoral";
+          }else if (this.incidencias[i].Estado=="Terminada"){
+            this.incidencias[i].Color="#C0D9D9";
+          }else{ /* Enviada */
+            this.incidencias[i].Color="LightSalmon";
+          }
         }
       }
 

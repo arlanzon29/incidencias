@@ -1,4 +1,4 @@
-<polymer-element name="post-card" attributes="done send image">
+<polymer-element name="post-card" attributes="done send image header footer backcolor">
   <template>
     <style>
     :host {
@@ -16,8 +16,7 @@
     .card-header {
       margin-bottom: 10px;
     }
-    polyfill-next-selector { content: '.card-header h2'; }
-    .card-header ::content h2 {
+    #header {
       margin: 0;
       font-size: 1.5rem;
       font-weight: 200;
@@ -27,8 +26,7 @@
       border-radius: 20%;
       margin: 10px;
     }
-     polyfill-next-selector { content: '.card-header p'; }
-    .card-header ::content p {
+    #footer {
       margin: 0;
       font-size: 1.0rem;
       font-weight: 200;
@@ -41,23 +39,9 @@
       right: 3px;
       color: #636363;
     }
-    :host([done]) #doneIcon {
-      color: blue;
-    }
 
 
-    #sendIcon {
-      position: absolute;
-      top: 43px;
-      right: 3px;
-      color: #636363;
-    }
-    :host([send]) #sendIcon {
-      color: blue;
-    }
-    #divIcon{
-      width:32px;
-    }
+
     #divImg{
       width:86px;
     }
@@ -66,17 +50,8 @@
     }
 
 
-
-     :host([done]) #mainDiv {
-        background-color: #C0D9D9;
-     }
-
-      :host([send]) #mainDiv {
-        background-color: LightSalmon;
-     }
-
      #mainDiv {
-        background-color: LightCoral  ;
+        background-color: {{backcolor}}  ;
      }
 
     </style>
@@ -85,21 +60,10 @@
           <img src="{{image}}" id="image" width="70" height="70" on-tap="{{clickImage}}" >
       </div>
       <div horizontal id="divText">
-        <content select="h2"></content>
-        <content select="p"></content>
+        <h2 id="header">{{header}}</h2>
+        <p id="footer">{{footer}}</p>
       </div>
-      <div vertical id="divIcon">
-        <core-icon-button
-          id="doneIcon"
-          icon="done"
-          on-tap="{{doneTapped}}">
-        </core-icon-button>
-        <core-icon-button
-          id="sendIcon"
-          icon="send"
-          on-tap="{{sendTapped}}">
-        </core-icon-button>
-      </div>
+      <content></content>
     </div>
 
   </template>
