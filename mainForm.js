@@ -55,8 +55,11 @@ Polymer("olba-listaClientes",{
         if (chrome.storage!=null){
           this.getUsernamePassword(this);
         }else{
-          this.username="manager";
-          this.password="secure";
+          var obj =JSON.parse( localStorage.getItem('auth'));
+          if (obj!=null){
+            this.username=obj.username;
+            this.password=obj.password;
+          }
         }
       },
       getUsernamePassword:function(main){

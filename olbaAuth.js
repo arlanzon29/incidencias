@@ -7,6 +7,7 @@ Polymer("olba-auth", {
     if (chrome.storage!=null){
       chrome.storage.sync.set({'password': this.password,"username":this.username}, this.chromeSync(this));
     }else{
+      localStorage.setItem('auth', JSON.stringify({"username":this.username,"password":this.password}));
        this.fire("connect");
     }
 
