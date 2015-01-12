@@ -41,16 +41,31 @@ Polymer("olba-listaClientes",{
     }
  });
 
+
     Polymer("olba-main", {
-      username:"manager",
-      password:"secure",
+      username:"",
+      password:"",
       addNuevaIncidencia:false,
       errorSheet:function(){
         this.$.errorDialog.toggle()
       },
       incidencias:[],
-        ready: function() {
+      ready: function() {
         this.$.auth.toggle();
+        if (chrome.storage!=null){
+          this.getUsernamePassword(this);
+        }else{
+          this.username="manager";
+          this.password="secure";
+        }
+      },
+      getUsernamePassword:function(main){
+          chrome.storage.sync.get(['username','password'],function(obj){
+                main.username=obj.username;
+                main.password=obj.password;
+              }
+
+          );
       },
       allTables:function(a,b,c){
 

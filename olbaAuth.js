@@ -4,6 +4,14 @@ Polymer("olba-auth", {
     this.username=this.$.txtUsername.value;
     this.password=this.$.txtPassword.value;
 
-    this.fire("connect");
+    if (chrome.storage!=null){
+      chrome.storage.sync.set({'password': this.password,"username":this.username}, this.chromeSync(this));
+    }else{
+       this.fire("connect");
+    }
+
+  },
+  chromeSync:function(obj){
+     obj.fire("connect");
   }
 });
