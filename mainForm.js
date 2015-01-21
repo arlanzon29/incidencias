@@ -38,6 +38,9 @@ Polymer("olba-listaClientes",{
 
       inci.modified=true;
       this.modified=true;
+    },
+    imageClick:function(event,detail,sender){
+        this.fire('filtercliente',sender.templateInstance.model.incidencia);
     }
  });
 
@@ -189,7 +192,12 @@ Polymer("olba-listaClientes",{
         for (var i=0;i<this.incidencias.length;i++){
           this.incidencias[i].image=this.incidencias[i].Cliente.replace(" ","")
         }
+      },
+      filterClienteEvent:function(event,obj){
+        this.filterCliente=obj.Cliente;
+          this.$.core_animated_pages.selected=4;
       }
+
 
     });
 

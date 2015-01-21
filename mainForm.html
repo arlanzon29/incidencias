@@ -34,6 +34,7 @@
       <template repeat="{{incidencia in incidencias}}" >
         <post-card on-done-tap="{{handleEstado}}" on-send-tap="{{handleEstado}}"
           image="./images/{{incidencia.image}}.jpg"
+          on-imageclick="{{imageClick}}"
           header="{{incidencia.Cliente}}" footer="{{incidencia.Incidencia}}"
           backColor="{{incidencia.Estado=='Pendiente'?'LightCoral':incidencia.Estado=='Terminada'?'#C0D9D9':'LightSalmon'}}">
         <div vertical id="divIcon">
@@ -108,7 +109,8 @@
         <section>
           <olba-listaincidencias id="pantallaIncidencias" incidencias="{{incidencias}}"
           on-refreshincidencias="{{refreshIncidencias}}"
-          on-savechanges="{{saveChanges}}"></olba-listaincidencias>
+          on-savechanges="{{saveChanges}}"
+          on-filtercliente="{{filterClienteEvent}}"></olba-listaincidencias>
         </section>
         <section>
           <olba-listaclientes clientes="{{clientes}}"></olba-listaclientes>
@@ -139,6 +141,9 @@
             </paper-autogrow-textarea>
           </paper-input-decorator>
            <paper-button  on-click="{{addIncidencia}}">Agregar Incidencia</paper-button>
+        </section>
+        <section>
+          <olba-listaincidenciascliente incidencias="{{incidencias}}" cliente="{{filterCliente}}"></olba-listaincidenciascliente>
         </section>
       </core-animated-pages>
     </core-scaffold>
