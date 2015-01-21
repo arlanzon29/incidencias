@@ -1,73 +1,6 @@
-<polymer-element name="olba-listaincidencias" attributes="incidencias modified">
-  <template>
-    <style>
-      #saveIcon{
-        display:block;
-         position:absolute;
-         right:40px;
-         top:12px;
-         visibility:hidden;
-      }
-      #refreshIcon{
-        display:block;
-         position:absolute;
-         right:40px;
-         top:12px;
-         visibility:visible;
-         color:blue;
-      }
 
-      :host([modified]) #saveIcon {
-        visibility:visible;
-      }
 
-       :host([modified]) #refreshIcon {
-        visibility:hidden;
-      }
-    </style>
 
-    <div fit="">
-       <paper-fab mini  icon="save" title="Save" id="saveIcon" on-click="{{saveChanges}}"></paper-fab>
-        <paper-fab mini  icon="refresh" title="Refresh" id="refreshIcon" on-click="{{refreshIncidencias}}"></paper-fab>
-      <h1>Lista Incidencias</h1>
-
-      <template repeat="{{incidencia in incidencias}}" >
-        <post-card on-done-tap="{{handleEstado}}" on-send-tap="{{handleEstado}}"
-          image="./images/{{incidencia.image}}.jpg"
-          on-imageclick="{{imageClick}}"
-          header="{{incidencia.Cliente}}" footer="{{incidencia.Incidencia}}"
-          backColor="{{incidencia.Estado=='Pendiente'?'LightCoral':incidencia.Estado=='Terminada'?'#C0D9D9':'LightSalmon'}}">
-        <div vertical id="divIcon">
-          <core-icon-button
-              id="doneIcon"
-              icon="done"
-              on-tap="{{doneTapped}}"
-               style="color:{{incidencia.Estado=='Pendiente'?'black':'blue'}}">
-            </core-icon-button>
-
-          <core-icon-button
-            id="sendIcon"
-            icon="send"
-            on-tap="{{sendTapped}}"
-             style="color:{{incidencia.Estado=='Enviada'?'blue':'black'}}">
-          </core-icon-button>
-          </div>
-        </post-card>
-      </template>
-    </div>
-  </template>
-</polymer-element>
-
-<polymer-element name="olba-listaClientes" attributes="clientes">
-  <template>
-     <h1>Seleccione Cliente</h1>
-     <template repeat="{{cliente in clientes}}">
-        <olba-postcardcliente on-next="{{clienteNext}}" image="./images/{{cliente.image}}.jpg">
-          <h2>{{cliente.Cliente}}</h2>
-        </olba-postcardcliente>
-      </template>
-  </template>
-</polymer-element>
 
 <polymer-element name="olba-main" attributes="inci name username password">
   <template>
@@ -143,12 +76,17 @@
            <paper-button  on-click="{{addIncidencia}}">Agregar Incidencia</paper-button>
         </section>
         <section>
-          <olba-listaincidenciascliente incidencias="{{incidencias}}" cliente="{{filterCliente}}"></olba-listaincidenciascliente>
+          <olba-listaincidenciascliente
+          id="pantallaIncidenciasCliente"
+          incidencias="{{incidencias}}"
+          cliente="{{filterCliente}}"
+          on-refreshincidencias="{{refreshIncidencias}}"
+          on-savechanges="{{saveChanges}}"></olba-listaincidenciascliente>
         </section>
       </core-animated-pages>
     </core-scaffold>
 
-    <paper-dialog heading="Autentication 0.06" id="auth" autoCloseDisabled>
+    <paper-dialog heading="Autentication 0.07" id="auth" autoCloseDisabled>
       <olba-auth on-connect="{{connect}}" username="{{username}}" password="{{password}}" id="olauth"></olba-auth>
     </paper-dialog>
 

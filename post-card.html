@@ -56,9 +56,11 @@
 
     </style>
     <div class="card-header" layout="" horizontal="" center="" id="mainDiv">
-      <div id="divImg" >
-          <img src="{{image}}" id="image" width="70" height="70" on-tap="{{clickImage}}" >
-      </div>
+      <template if="{{image!=null}}"
+        <div id="divImg" >
+            <img src="{{image}}" id="image" width="70" height="70" on-tap="{{clickImage}}" >
+        </div>
+      </template>
       <div horizontal id="divText">
         <h2 id="header">{{header}}</h2>
         <p id="footer">{{footer}}</p>

@@ -1,48 +1,3 @@
-Polymer("olba-listaClientes",{
-
-})
- Polymer("olba-listaincidencias", {
-   publish: {
-        modified: {
-          value: false,
-          reflect: true
-        }
-      },
-   refreshIncidencias:function(){
-     this.fire('refreshincidencias');
-   },
-   saveChanges:function(){
-     this.fire('savechanges');
-   },
-    doneTapped:function(event, detail, sender){
-      var inci = sender.templateInstance.model.incidencia;
-
-      if (inci.Estado=="Pendiente"){
-          inci.Estado="Terminada";
-      }else{
-          inci.Estado="Pendiente";
-      }
-
-      inci.modified=true;
-      this.modified=true;
-    }
-    ,
-    sendTapped:function(event, detail, sender){
-      var inci = sender.templateInstance.model.incidencia;
-
-      if (inci.Estado=="Enviada"){
-          inci.Estado="Terminada";
-      }else{
-          inci.Estado="Enviada";
-      }
-
-      inci.modified=true;
-      this.modified=true;
-    },
-    imageClick:function(event,detail,sender){
-        this.fire('filtercliente',sender.templateInstance.model.incidencia);
-    }
- });
 
 
     Polymer("olba-main", {
@@ -110,6 +65,7 @@ Polymer("olba-listaClientes",{
       mergeall:function(){
         if (!this.addNuevaIncidencia){/* Si no añado es que estoy actualizando */
           this.$.pantallaIncidencias.modified=false;
+          this.$.pantallaIncidenciasCliente.modified=false;
 
           for (var i=0;i<this.incidencias.length;i++){
             this.incidencias[i].modified=false;
