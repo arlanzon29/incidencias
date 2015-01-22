@@ -152,6 +152,9 @@
       filterClienteEvent:function(event,obj){
         this.filterCliente=obj.Cliente;
           this.$.core_animated_pages.selected=4;
+      },
+      backListaIncidenciaCliente:function(){
+           this.$.core_animated_pages.selected=0;
       }
 
 
